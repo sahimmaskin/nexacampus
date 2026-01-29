@@ -22,7 +22,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#classModal"
                         data-session="{}">
-                        Add Class
+                        Add Classss
                     </button>
                 </div>
                 <div class="modal fade" id="classModal" tabindex="-1">
