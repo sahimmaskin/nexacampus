@@ -15,6 +15,11 @@ class CreateSchool extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'username' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 50,
+                'unique' => true,
+            ],
             'trust_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,

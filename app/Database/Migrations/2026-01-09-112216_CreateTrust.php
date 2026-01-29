@@ -20,7 +20,7 @@ class CreateTrust extends Migration
                 'constraint' => 50,
                 'unique' => true,
             ],
-            'school_name' => [
+            'trust_name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 150,
             ],
