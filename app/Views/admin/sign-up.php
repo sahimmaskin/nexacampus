@@ -58,6 +58,16 @@
 
                     <div class="mb-4">
                         <label class="form-label">
+                            Trust Name: <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="trust_name"
+                            class="form-control form-control-lg"
+                            placeholder="Trust Name"
+                            required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
                             School Name: <span class="text-danger">*</span>
                         </label>
                         <input type="text" name="school_name"

@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 use App\Models\TrustModel;
 use App\Models\SchoolModel;
+use App\Models\UserModel;
 
 class LoginController extends BaseController
 {
@@ -37,64 +38,31 @@ class LoginController extends BaseController
         $password = $this->request->getPost('password');
         $remember = $this->request->getPost('remember');
 
-        $trustModel = new TrustModel();
-        $schoolModel = new SchoolModel();
+        $userModel = new UserModel();
 
-        $trustData = $trustModel->where('mobile', $login_id)
-            ->orWhere('username', $login_id)
+        $user = $userModel
+            ->where('mobile', $login_id)
             ->orWhere('email', $login_id)
             ->first();
 
-        if ($trustData) {
+        if ($user) {
 
-            if ($trustData['status'] != 'Active') {
+            if ($user['status'] !== 'Active') {
                 return redirect()->back()->with('error', 'Id not active.');
             }
 
-            if (password_verify($password, $trustData['password'])) {
+            if (password_verify($password, $user['password'])) {
 
-                $trustId = $trustData['id'];
+                $userId = $user['id'];
 
-                $schoolData = $schoolModel->where('trust_id', $trustId)
-                    ->first();
-
-                $schoolId = $schoolData['id'];
-
-                /*if ($trustData['is_logged'] == 'Yes') {
-                    return redirect()->back()->with('error', 'Already logged in.');
-                }*/
-
-                $insData = [
-                    'user_id'       => $trustId,
-                    'login_time'    => date('Y-m-d H:i:s'),
-                ];
-
-                // $userLoginModel = new UserLoginModel();
-
-                // $userLoginModel->insert($insData);
-
-                // $usersModel->update($userId, ['is_logged' => 'Yes']);
+                // No need to query again — you already have the user
+                $schoolId = $user['id'];
 
                 session()->set([
-                    'isAdmin'   => true,
-                    'trustId'   => $trustId,
+                    'isAdmin'    => true,
                     'schoolId'   => $schoolId,
-                    'adminName' => $trustData['school_name'],
+                    'adminName'  => $user['name'] ?? '',
                 ]);
-
-                // if ($remember) {
-                //     $token = bin2hex(random_bytes(16));
-                //     $expiry = time() + (60 * 60 * 24 * 30);
-
-                //     $updData = [
-                //         'remember_token' => $token,
-                //         'token_expire'   => date('Y-m-d H:i:s', $expiry),
-                //     ];
-
-                //     $usersModel->update($userId, $updData);
-
-                //     setcookie('remember_token', $token, $expiry, '/', '', false, true);
-                // }
 
                 return redirect()->to('/admin/dashboard');
             }

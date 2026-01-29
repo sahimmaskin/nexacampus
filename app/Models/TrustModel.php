@@ -10,9 +10,9 @@ class TrustModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['username', 'school_name', 'user_type', 'email', 'mobile', 'password', 'address_1', 'address_2', 'accn_status','status'];
+    protected $allowedFields    = ['trust_name', 'email', 'mobile', 'password', 'address_1', 'address_2', 'accn_status','status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -36,7 +36,7 @@ class TrustModel extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = ['addTrustUsername'];
+    protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
@@ -44,16 +44,5 @@ class TrustModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    protected function addTrustUsername(array $data)
-    {
-        if (isset($data['id'])) {
-            $schoolId = rand(100,999).$data['id'];
-            $username = 'NEXA' . str_pad($schoolId, 5, '0', STR_PAD_LEFT);
-            $db      = \Config\Database::connect();
-            $builder = $db->table($this->table);
-            $builder->where('id', $data['id'])
-                    ->update(['username ' => $username]);
-        }
-        return $data;
-    }
+    
 }

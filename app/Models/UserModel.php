@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'name', 'mobile', 'user_type', 'email', 'address', 'trust_id', 'school_id', 'password', 'status'];
+    protected $allowedFields    = ['name', 'email', 'mobile', 'password', 'school_id', 'role_id', 'user_type', 'accn_status', 'status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -36,24 +36,11 @@ class UserModel extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = ['addUsername'];
+    protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    protected function addUsername(array $data)
-    {
-        if (isset($data['id'])) {
-            $schoolId = rand(100,999).$data['id'];
-            $username = 'USER' . str_pad($schoolId, 5, '0', STR_PAD_LEFT);
-            $db      = \Config\Database::connect();
-            $builder = $db->table($this->table);
-            $builder->where('id', $data['id'])
-                    ->update(['username ' => $username]);
-        }
-        return $data;
-    }
 }

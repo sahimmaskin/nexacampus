@@ -6,15 +6,18 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\TrustModel;
 use App\Models\SchoolModel;
+use App\Models\UserModel;
 
 class RegisterController extends BaseController
 {
     protected $trustModel;
     protected $schoolModel;
+    protected $userModel;
     public function __construct()
     {
         $this->trustModel = new TrustModel();
         $this->schoolModel = new SchoolModel();
+        $this->userModel = new UserModel();
         helper(['form', 'url', 'custom']);
     }
 
@@ -35,8 +38,7 @@ class RegisterController extends BaseController
         }
 
         $formData = [
-            'school_name'  => !empty($this->request->getPost('school_name')) ? $this->request->getPost('school_name') : null,
-            'email'       => !empty($this->request->getPost('email')) ? $this->request->getPost('email') : null,
+            'trust_name'  => !empty($this->request->getPost('trust_name')) ? $this->request->getPost('trust_name') : null,
             'mobile'    => !empty($this->request->getPost('mobile')) ? $this->request->getPost('mobile') : null,
             'password'    => password_hash($password, PASSWORD_DEFAULT),
             'address_1'    => !empty($this->request->getPost('address_1')) ? $this->request->getPost('address_1') : null,
@@ -61,7 +63,17 @@ class RegisterController extends BaseController
                 'address_2'    => !empty($this->request->getPost('address_2')) ? $this->request->getPost('address_2') : null,
                 'status' => !empty($this->request->getPost('status')) ? $this->request->getPost('status') : 'Active'
             ];
-            $trustData = $this->schoolModel->insert($schoolFormData);
+            $schoolId = $this->schoolModel->insert($schoolFormData);
+            $userData = [
+                'school_id'  => $schoolId,
+                'name'  => !empty($this->request->getPost('school_name')) ? $this->request->getPost('school_name') : null,
+                'email'       => !empty($this->request->getPost('email')) ? $this->request->getPost('email') : null,
+                'mobile'    => !empty($this->request->getPost('mobile')) ? $this->request->getPost('mobile') : null,
+                'password'    => password_hash($password, PASSWORD_DEFAULT),
+                'user_type' => 'Trust',
+                'status' => !empty($this->request->getPost('status')) ? $this->request->getPost('status') : 'Active'
+            ];
+            $this->userModel->insert($userData);
             return redirect()->to('/admin/login')->with('success', 'Added Successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
