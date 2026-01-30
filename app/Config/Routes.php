@@ -1,7 +1,6 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-
 /**
  * @var RouteCollection $routes
  */
@@ -62,5 +61,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 
         $routes->get('fee-setup', 'FeeController::feeSetUp');
         $routes->post('save-fee', 'FeeController::saveFee');
+        // school settings routes
+        $routes->get('school-settings','SchoolSettingController::schoolSettings',['as' =>'schoolSettings']);
     });
 });
