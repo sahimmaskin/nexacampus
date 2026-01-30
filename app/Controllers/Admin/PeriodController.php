@@ -5,15 +5,21 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\PeriodModel;
+use App\Models\SessionModel;
+use App\Models\TimetableModel;
+use App\Models\classModel;
+use App\Models\SectionModel;
 
 class PeriodController extends BaseController
 {
    
      public function __construct()
     {
+        $this->sessionModel = new SessionModel();
+        $this->timeTableModel = new TimetableModel();
         $this->periodModel = new PeriodModel();
-        // $this->classModel = new classModel();
-        // $this->sectionModel = new SectionModel();
+        $this->classModel = new classModel();
+        $this->sectionModel = new SectionModel();
         // $this->subjectModel = new SubjectModel();
         $this->trustId  = session()->get('trustId');
         $this->schoolId = session()->get('schoolId');
@@ -79,5 +85,62 @@ class PeriodController extends BaseController
 }
 
 
-   
+   // for timetable functions
+     public function timeTablePage()
+    {
+        $limit = PER_PAGE;
+      
+      $allTimeTable = $this->timeTableModel
+            ->getTimetableWithPeriod($this->schoolId)
+            ->paginate($limit);
+        $allClass = $this->classModel
+            ->where('school_id', $this->schoolId)
+            ->paginate($limit);
+        $allSection = $this->sectionModel
+            ->where('school_id', $this->schoolId)
+            ->paginate($limit);
+        $allPeriod = $this->periodModel
+            ->where('school_id', $this->schoolId)
+            ->paginate($limit);
+       
+        $data = [
+            'title'         => 'Time Table',
+            'lists'         => $allTimeTable,
+            'pager'         => $this->timeTableModel->pager,
+            'limit'         => $limit,
+            'classes'   => $allClass,
+            'sections'  => $allSection,
+            'periods'   => $allPeriod,
+        ];
+
+        return view('admin/timetables/time_tables', $data);
+    }
+
+    public function saveTimeTable()
+        {
+            $id = $this->request->getPost('id');
+
+            $formData = [
+                'school_id'  => $this->request->getPost('school_id'),
+                'class_id'   => $this->request->getPost('class_id'),
+                'section_id' => $this->request->getPost('section_id'),
+                'period_id'  => $this->request->getPost('period_id'),
+                'day'        => $this->request->getPost('day'),
+            ];
+
+            if ($id) {
+                $this->timeTableModel->update($id, $formData);
+                $message = 'Timetable updated successfully';
+            } else {
+                $this->timeTableModel->insert($formData);
+                $message = 'Timetable added successfully';
+            }
+
+            return redirect()
+                ->to(route_to('timeTablePage'))
+                ->with('success', $message);
+        }
+
+
+
 }

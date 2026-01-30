@@ -49,4 +49,14 @@ class TimetableModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+ public function getTimetableWithPeriod($schoolId)
+{
+    return $this->select('
+            timetables.*,
+            periods.start_time,
+            periods.end_time
+        ')
+        ->join('periods', 'periods.id = timetables.period_id')
+        ->where('timetables.school_id', $schoolId);
+}
 }

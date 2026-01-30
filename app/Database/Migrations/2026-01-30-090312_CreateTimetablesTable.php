@@ -43,20 +43,13 @@ class CreateTimetablesTable extends Migration
             'type' => 'ENUM',
             'constraint' => ['mon','tue','wed','thu','fri','sat'],
             'null'      =>true, 
-        ],
-        'created_at' => [
-            'type' => 'DATETIME',
-            'null' => true,
-        ],
-        'updated_at' => [
-            'type' => 'DATETIME',
-            'null' => true,
-        ],
-        'deleted_at' => [
-            'type' => 'DATETIME',
-            'null' => true,
-        ],
+        ]
         ]);
+           $this->forge->addField("
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            deleted_at DATETIME NULL
+        ");
         $this->forge->addKey('id',true);
         $this->forge->createTable('timetables');
     }

@@ -311,9 +311,15 @@
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/fee-setup') ?>" class="sa-nav__link">
+                                            <a href="<?= route_to('timeTablePage') ?>" class="sa-nav__link">
                                                 <span class="sa-nav__menu-item-padding"></span>
                                                 <span class="sa-nav__title"> Time Tables </span>
+                                            </a>
+                                        </li>
+                                        <li class="sa-nav__menu-item">
+                                            <a href="<?= route_to('timeTablePage') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding"></span>
+                                                <span class="sa-nav__title">Time Table Slots </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -390,7 +396,6 @@
                             data-bs-offset="0,1" aria-expanded="false">
                             <span class="sa-toolbar-user__info">
                                 <span class="sa-toolbar-user__title">
-                                    <?= session()->get('adminName') ?>
                                 </span>
                                 <span class="sa-toolbar-user__subtitle">
                                 </span>
