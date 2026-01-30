@@ -63,5 +63,12 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->post('save-fee', 'FeeController::saveFee');
         // school settings routes
         $routes->get('school-settings','SchoolSettingController::schoolSettings',['as' =>'schoolSettings']);
+        // period routes
+        $routes->get('periods','PeriodController::periodPage',['as' => 'periodPage']);
+        $routes->post('periods','PeriodController::savePeriod',['as' => 'savePeriod']);
+        $routes->get('period/delete/(:num)', 'PeriodController::deletePeriod/$1', [
+            'as' => 'deletePeriod'
+        ]);
+
     });
 });

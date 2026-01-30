@@ -5,18 +5,24 @@
     <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="format-detection" content="telephone=no" />
-    <title><?= COMPANY_NAME ?> - <?= $title ?? '' ?></title>
+    <title>
+        <?= COMPANY_NAME ?> -
+        <?= $title ?? '' ?>
+    </title>
     <meta name="csrf-name" content="<?= csrf_token() ?>">
     <meta name="csrf-hash" content="<?= csrf_hash() ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="<?php echo base_url('assets/logo/') ?>favicon.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/bootstrap/css/bootstrap.ltr.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/highlight.js/styles/github.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/simplebar/simplebar.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/quill/quill.snow.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/air-datepicker/css/datepicker.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/select2/css/select2.min.css" />
-    <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/datatables/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet"
+        href="<?php echo base_url('assets/admin/') ?>vendor/datatables/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/nouislider/nouislider.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/fullcalendar/main.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>css/style.css" />
@@ -85,7 +91,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open">
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon"
+                                    data-sa-collapse-item="sa-nav__menu-item--open">
                                     <a href="#" class="sa-nav__link" data-sa-collapse-trigger="">
                                         <span class="sa-nav__icon">
                                             <i class='fas fa-user-alt'></i>
@@ -93,10 +100,9 @@
                                         <span class="sa-nav__title">
                                             Users
                                         </span>
-                                        <span
-                                            class="sa-nav__arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="6"
-                                                height="9" viewBox="0 0 6 9" fill="currentColor">
+                                        <span class="sa-nav__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9"
+                                                viewBox="0 0 6 9" fill="currentColor">
                                                 <path
                                                     d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
                                                 </path>
@@ -105,32 +111,27 @@
                                     </a>
                                     <ul class="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content="">
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/add-user') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/add-user') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Add
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/user-list') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/user-list') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     List
                                                 </span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open">
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon"
+                                    data-sa-collapse-item="sa-nav__menu-item--open">
                                     <a href="#" class="sa-nav__link" data-sa-collapse-trigger="">
                                         <span class="sa-nav__icon">
                                             <i class='fas fa-book-open'></i>
@@ -138,10 +139,9 @@
                                         <span class="sa-nav__title">
                                             Academics
                                         </span>
-                                        <span
-                                            class="sa-nav__arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="6"
-                                                height="9" viewBox="0 0 6 9" fill="currentColor">
+                                        <span class="sa-nav__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9"
+                                                viewBox="0 0 6 9" fill="currentColor">
                                                 <path
                                                     d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
                                                 </path>
@@ -150,57 +150,46 @@
                                     </a>
                                     <ul class="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content="">
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/view-session') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/view-session') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Session
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/view-class') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/view-class') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Class
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/view-section') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/view-section') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Section
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/view-subject') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/view-subject') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Subject
                                                 </span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                
-                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open">
+
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon"
+                                    data-sa-collapse-item="sa-nav__menu-item--open">
                                     <a href="#" class="sa-nav__link" data-sa-collapse-trigger="">
                                         <span class="sa-nav__icon">
                                             <i class="fa fa-users"></i>
@@ -208,10 +197,9 @@
                                         <span class="sa-nav__title">
                                             Students
                                         </span>
-                                        <span
-                                            class="sa-nav__arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="6"
-                                                height="9" viewBox="0 0 6 9" fill="currentColor">
+                                        <span class="sa-nav__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9"
+                                                viewBox="0 0 6 9" fill="currentColor">
                                                 <path
                                                     d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
                                                 </path>
@@ -220,37 +208,28 @@
                                     </a>
                                     <ul class="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content="">
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/new-application') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/new-application') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     New Students
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/manage-students') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/manage-students') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Manage Students
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/student-attendance') ?>"
-                                                class="sa-nav__link">
-                                                <span
-                                                    class="sa-nav__menu-item-padding">
+                                            <a href="<?= base_url('admin/student-attendance') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding">
                                                 </span>
-                                                <span
-                                                    class="sa-nav__title">
+                                                <span class="sa-nav__title">
                                                     Mark Attendance
                                                 </span>
                                             </a>
@@ -258,7 +237,8 @@
                                     </ul>
                                 </li>
 
-                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon" data-sa-collapse-item="sa-nav__menu-item--open">
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon"
+                                    data-sa-collapse-item="sa-nav__menu-item--open">
                                     <a href="#" class="sa-nav__link" data-sa-collapse-trigger="">
                                         <span class="sa-nav__icon">
                                             <i class="fas fa-rupee-sign"></i>
@@ -266,10 +246,9 @@
                                         <span class="sa-nav__title">
                                             Fees
                                         </span>
-                                        <span
-                                            class="sa-nav__arrow">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="6"
-                                                height="9" viewBox="0 0 6 9" fill="currentColor">
+                                        <span class="sa-nav__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9"
+                                                viewBox="0 0 6 9" fill="currentColor">
                                                 <path
                                                     d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
                                                 </path>
@@ -278,22 +257,20 @@
                                     </a>
                                     <ul class="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content="">
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/fee-particulars') ?>"
-                                                class="sa-nav__link">
+                                            <a href="<?= base_url('admin/fee-particulars') ?>" class="sa-nav__link">
                                                 <span class="sa-nav__menu-item-padding"></span>
                                                 <span class="sa-nav__title"> Fee Particular </span>
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= base_url('admin/fee-setup') ?>"
-                                                class="sa-nav__link">
+                                            <a href="<?= base_url('admin/fee-setup') ?>" class="sa-nav__link">
                                                 <span class="sa-nav__menu-item-padding"></span>
                                                 <span class="sa-nav__title"> Fee Setup </span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                 <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
                                     <a href="<?= route_to('schoolSettings') ?>" class="sa-nav__link">
                                         <span class="sa-nav__icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -304,10 +281,44 @@
                                             </svg>
                                         </span>
                                         <span class="sa-nav__title">
-                                           School Settings
+                                            School Settings
                                         </span>
                                     </a>
                                 </li>
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon"
+                                    data-sa-collapse-item="sa-nav__menu-item--open">
+                                    <a href="#" class="sa-nav__link" data-sa-collapse-trigger="">
+                                        <span class="sa-nav__icon">
+                                            <i class="fas fa-rupee-sign"></i>
+                                        </span>
+                                        <span class="sa-nav__title">
+                                            Time Table
+                                        </span>
+                                        <span class="sa-nav__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9"
+                                                viewBox="0 0 6 9" fill="currentColor">
+                                                <path
+                                                    d="M5.605,0.213 C6.007,0.613 6.107,1.212 5.706,1.612 L2.696,4.511 L5.706,7.409 C6.107,7.809 6.107,8.509 5.605,8.808 C5.204,9.108 4.702,9.108 4.301,8.709 L-0.013,4.511 L4.401,0.313 C4.702,-0.087 5.304,-0.087 5.605,0.213 Z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul class="sa-nav__menu sa-nav__menu--sub" data-sa-collapse-content="">
+                                        <li class="sa-nav__menu-item">
+                                            <a href="<?= route_to('periodPage') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding"></span>
+                                                <span class="sa-nav__title"> Periods </span>
+                                            </a>
+                                        </li>
+                                        <li class="sa-nav__menu-item">
+                                            <a href="<?= base_url('admin/fee-setup') ?>" class="sa-nav__link">
+                                                <span class="sa-nav__menu-item-padding"></span>
+                                                <span class="sa-nav__title"> Time Tables </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
@@ -326,7 +337,7 @@
                             </svg></button></div>
                     <div class="sa-toolbar__item sa-toolbar__item--search">
                         <!-- <form class="sa-search sa-search--state--pending"> -->
-                            <!-- <div class="sa-search__body"><label class="visually-hidden" for="input-search">Search
+                        <!-- <div class="sa-search__body"><label class="visually-hidden" for="input-search">Search
                                     for:</label>
                                 <div class="sa-search__icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
                                         height="1em" viewBox="0 0 16 16" fill="currentColor">
@@ -375,13 +386,13 @@
                             </svg></button></div>
 
                     <div class="dropdown sa-toolbar__item">
-                        <button class="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" data-bs-offset="0,1" aria-expanded="false">
+                        <button class="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            data-bs-offset="0,1" aria-expanded="false">
                             <span class="sa-toolbar-user__info">
                                 <span class="sa-toolbar-user__title">
                                     <?= session()->get('adminName') ?>
                                 </span>
-                                <span
-                                    class="sa-toolbar-user__subtitle">
+                                <span class="sa-toolbar-user__subtitle">
                                 </span>
                             </span>
                         </button>
@@ -407,9 +418,13 @@
             <?= $this->renderSection('content') ?>
             <footer>
                 <div class="sa-app__footer d-block d-md-flex">
-                    <a href="<?= base_url() ?>"><?= COMPANY_NAME ?></a> © 2025<div class="m-auto"></div>
+                    <a href="<?= base_url() ?>">
+                        <?= COMPANY_NAME ?>
+                    </a> © 2025<div class="m-auto"></div>
                     <div>
-                        Designed & Developed by <a href="<?= base_url() ?>"> <?= COMPANY_NAME ?></a>
+                        Designed & Developed by <a href="<?= base_url() ?>">
+                            <?= COMPANY_NAME ?>
+                        </a>
                     </div>
                 </div>
             </footer>
@@ -425,7 +440,8 @@
     <script src="<?php echo base_url('assets/admin/') ?>vendor/air-datepicker/js/datepicker.min.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>vendor/air-datepicker/js/i18n/datepicker.en.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>vendor/select2/js/select2.min.js"></script>
-    <script src="<?php echo base_url('assets/admin/') ?>vendor/fontawesome/js/all.min.js" data-auto-replace-svg="" async=""></script>
+    <script src="<?php echo base_url('assets/admin/') ?>vendor/fontawesome/js/all.min.js" data-auto-replace-svg=""
+        async=""></script>
     <script src="<?php echo base_url('assets/admin/') ?>vendor/chart.js/chart.min.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>vendor/datatables/js/dataTables.bootstrap5.min.js"></script>
@@ -436,6 +452,8 @@
     <script src="<?php echo base_url('assets/admin/') ?>js/calendar.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>js/demo.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>js/demo-chart-js.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
