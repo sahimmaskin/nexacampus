@@ -39,6 +39,7 @@ class RegisterController extends BaseController
 
         $formData = [
             'trust_name'  => !empty($this->request->getPost('trust_name')) ? $this->request->getPost('trust_name') : null,
+            'email'       => !empty($this->request->getPost('email')) ? $this->request->getPost('email') : null,
             'mobile'    => !empty($this->request->getPost('mobile')) ? $this->request->getPost('mobile') : null,
             'password'    => password_hash($password, PASSWORD_DEFAULT),
             'address_1'    => !empty($this->request->getPost('address_1')) ? $this->request->getPost('address_1') : null,
@@ -65,6 +66,7 @@ class RegisterController extends BaseController
             ];
             $schoolId = $this->schoolModel->insert($schoolFormData);
             $userData = [
+                'trust_id' => $lastID,
                 'school_id'  => $schoolId,
                 'name'  => !empty($this->request->getPost('school_name')) ? $this->request->getPost('school_name') : null,
                 'email'       => !empty($this->request->getPost('email')) ? $this->request->getPost('email') : null,

@@ -31,10 +31,19 @@ class CreatePlan extends Migration
                 'constraint'     => 50,
                 'null'       => true,
             ],
-            'definition' => [
+            'description' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 50,
                 'null'       => true,
+            ],
+            'school' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 50,
+                'null'       => true,
+            ],
+            'status' => [
+                'type' => "ENUM('Active', 'Inactive')",
+                'null' => true,
             ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
             'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',

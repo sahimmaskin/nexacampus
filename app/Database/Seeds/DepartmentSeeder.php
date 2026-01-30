@@ -9,26 +9,22 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         $data = [
-            [            	
-                'name'  			=> 'Principal',
+            [
+                'name'              => 'Admin',
             ],
-            [            	
-                'name'  			=> 'Faculties',
+            [
+                'name'              => 'Teaching',
             ],
-            [            	
-                'name'  			=> 'Accountant',
+            [
+                'name'              => 'Accounts',
             ],
-            [            	
-                'name'  			=> 'Librarian',
+            [
+                'name'              => 'Library',
             ],
-            [            	
-                'name'  			=> 'Transport',
-            ],
-            [            	
-                'name'  			=> 'Students',
+            [
+                'name'              => 'Transport',
             ],
         ];
-
         $this->db->table('department')->insertBatch($data);
     }
 }

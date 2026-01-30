@@ -3,102 +3,75 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
-
-use App\Models\TrustModel;
-use App\Models\SchoolModel;
 use App\Models\UserModel;
 
 class LoginController extends BaseController
 {
+    public function __construct()
+    {
+        helper(['form', 'url', 'custom']);
+    }
+
     public function index()
     {
-        if (session()->get('isAdmin')) {
+        if (session()->has('userId') && session()->get('isAdmin') === true) {
             return redirect()->to('/admin/dashboard');
-        } else {
-            return view('admin/login', ['title' => 'Admin Login']);
         }
+        return view('admin/login', ['title' => 'Admin Login']);
     }
 
     public function auth()
     {
-        $validation = \Config\Services::validation();
-
         $rules = [
-            //'email'    => 'required|valid_email',
-            'login_id'    => 'required',
+            'login_id' => 'required',
             'password' => 'required|min_length[6]',
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
-        $login_id = $this->request->getPost('login_id');
+        $login_id = trim($this->request->getPost('login_id'));
         $password = $this->request->getPost('password');
-        $remember = $this->request->getPost('remember');
 
         $userModel = new UserModel();
 
         $user = $userModel
+            ->groupStart()
             ->where('mobile', $login_id)
             ->orWhere('email', $login_id)
+            ->groupEnd()
             ->first();
 
-        if ($user) {
-
-            if ($user['status'] !== 'Active') {
-                return redirect()->back()->with('error', 'Id not active.');
-            }
-
-            if (password_verify($password, $user['password'])) {
-
-                $userId = $user['id'];
-
-                // No need to query again — you already have the user
-                $schoolId = $user['id'];
-
-                session()->set([
-                    'isAdmin'    => true,
-                    'schoolId'   => $schoolId,
-                    'adminName'  => $user['name'] ?? '',
-                ]);
-
-                return redirect()->to('/admin/dashboard');
-            }
+        if (!$user) {
+            return redirect()->back()->with('error', 'Invalid login id or password');
         }
 
-        return redirect()->back()->with('error', 'Invalid login id or password');
-    }
+        if ($user['status'] !== 'Active') {
+            return redirect()->back()->with('error', 'Id not active');
+        }
 
-    public function reset_pwd_form($value = '')
-    {
-        return redirect()->to('/admin/login');
+        if (!password_verify($password, $user['password'])) {
+            return redirect()->back()->with('error', 'Invalid login id or password');
+        }
+        session()->regenerate(true);
+
+        session()->set([
+            'isAdmin'  => true,
+            'userId'   => $user['id'],
+            'schoolId' => $user['school_id'],
+            'trustId'  => $user['trust_id'],
+            'userType' => $user['user_type'],
+        ]);
+
+        return redirect()->to('/admin/dashboard');
     }
 
     public function logout()
     {
-        $userId = session()->get('adminId');
-
-        // $userLoginModel = new UserLoginModel();
-
-        // $lastLogged = $userLoginModel->where('user_id', $userId)
-        //     ->where('logout_time', NULL)
-        //     ->orderBy('id', 'DESC')->first();
-
-        // if (!empty($lastLogged)) {
-        //     $lastId = $lastLogged['id'];
-
-        //     $userLoginModel->update($lastId, ['logout_time' => date('Y-m-d H:i:s')]);
-        // }
-
-        // $usersModel = new UsersModel();
-
-        // $usersModel->update($userId, ['is_logged' => 'No']);
-
         session()->destroy();
-        // setcookie('remember_token', '', time() - 3600, '/');
-
         return redirect()->to('/admin/login');
     }
 }

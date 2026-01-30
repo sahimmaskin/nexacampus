@@ -39,6 +39,12 @@ class CreateUser extends Migration
                 'unsigned'   => true,
                 'null'       => true,
             ],
+            'trust_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+                'null'       => true,
+            ],
             'role_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,
@@ -68,6 +74,7 @@ class CreateUser extends Migration
         $this->forge->addKey('id', true);
 
         $this->forge->addForeignKey('school_id', 'school', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->addForeignKey('trust_id', 'trust', 'id', 'SET NULL', 'CASCADE');
 
         $this->forge->createTable('user');
     }
