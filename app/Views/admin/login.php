@@ -55,7 +55,7 @@
                     <h1 class="mb-0 fs-3"><?= $title ?></h1>
                     <div class="fs-exact-14 text-muted mt-2 pt-1 mb-5 pb-2">Log in to your account to continue.</div>
                     <div class="mb-4">
-                        <label class="form-label">Email Address</label>
+                        <label class="form-label">Login Id/Email Address</label>
                         <input type="text" name="login_id" class="form-control form-control-lg" />
                     </div>
                     <div class="mb-4">

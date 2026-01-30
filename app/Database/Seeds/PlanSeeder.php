@@ -13,6 +13,9 @@ class PlanSeeder extends Seeder
                 'duration' => 12,
                 'name'     => 'Session',
                 'amount' => 5000,
+                'description' => NULL,
+                'school' => 2,
+                'status' => 'Active'
             ],
         ];
 

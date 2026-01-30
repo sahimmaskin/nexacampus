@@ -26,6 +26,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 
         $routes->get('dashboard', 'DashboardController::index');
 
+        $routes->get('view-designation', 'DeignationController::viewDesignation');
+
         $routes->get('set-formats', 'FormatController::formatList');
         $routes->post('format-update', 'FormatController::saveFormat');
 

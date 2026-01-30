@@ -11,6 +11,9 @@
       <div class="row g-4 align-items-center">
         <div class="col">
           <h1 class="h3 m-0"><?= $title ?></h1>
+          <?= print_r($_SESSION) ?>
+          <br>
+          <?= print_r($plans) ?>
         </div>
       </div>
     </div>
