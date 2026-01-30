@@ -15,12 +15,7 @@ class CreateTrust extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'username' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 50,
-                'unique' => true,
-            ],
-            'school_name' => [
+            'trust_name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 150,
             ],

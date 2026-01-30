@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateEmployee extends Migration
+class CreateUser extends Migration
 {
     public function up()
     {
@@ -15,14 +15,10 @@ class CreateEmployee extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'username' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 50,
-                'unique' => true,
-            ],
             'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 150,
+                'null' => true,
             ],
             'email' => [
                 'type' => 'TEXT',
@@ -37,10 +33,11 @@ class CreateEmployee extends Migration
                 'constraint' => '255',
                 'null' => true,
             ],
-            'address' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-                'null' => true,
+            'school_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+                'null'       => true,
             ],
             'trust_id' => [
                 'type'       => 'INT',
@@ -48,21 +45,19 @@ class CreateEmployee extends Migration
                 'unsigned'   => true,
                 'null'       => true,
             ],
-            'school_id' => [
+            'role_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,
                 'unsigned'   => true,
                 'null'       => true,
             ],
             'user_type' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'unsigned'   => true,
+                'type'       => "ENUM('School', 'Trust')",
                 'null'       => true,
             ],
             'accn_status' => [
                 'type'       => "ENUM('Pending','Approved', 'Rejected')",
-                'default'    => 'Approved',
+                'default'    => 'Pending',
             ],
             'status' => [
                 'type'       => "ENUM('Active','Inactive')",
@@ -78,9 +73,8 @@ class CreateEmployee extends Migration
 
         $this->forge->addKey('id', true);
 
-        $this->forge->addForeignKey('trust_id', 'trust', 'id', 'SET NULL', 'CASCADE');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'SET NULL', 'CASCADE');
-        $this->forge->addForeignKey('user_type', 'department', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->addForeignKey('trust_id', 'trust', 'id', 'SET NULL', 'CASCADE');
 
         $this->forge->createTable('user');
     }

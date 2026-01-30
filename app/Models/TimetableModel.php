@@ -4,15 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class TimetableModel extends Model
 {
-    protected $table            = 'user';
+    protected $table            = 'timetables';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'email', 'mobile', 'password', 'school_id', 'trust_id', 'role_id', 'user_type', 'accn_status', 'status'];
+    protected $allowedFields    = [
+                                    'school_id',
+                                    'class_id',
+                                    'section_id',
+                                    'period_id',
+                                    'day',
+                                   ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,4 +49,14 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+ public function getTimetableWithPeriod($schoolId)
+{
+    return $this->select('
+            timetables.*,
+            periods.start_time,
+            periods.end_time
+        ')
+        ->join('periods', 'periods.id = timetables.period_id')
+        ->where('timetables.school_id', $schoolId);
+}
 }

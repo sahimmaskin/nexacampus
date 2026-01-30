@@ -110,14 +110,14 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <table class="table table-bordered mb-0" id="userTable">
+                                <table class="table table-bordered mb-0 text-center" id="userTable">
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
                                             <th>Name</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
-                                            <th>Action</th>
+                                            <th style="width: 2vw;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

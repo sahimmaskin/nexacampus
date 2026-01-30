@@ -1,7 +1,6 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-
 /**
  * @var RouteCollection $routes
  */
@@ -26,6 +25,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->get('my-profile', 'ProfileController::myProfile');
 
         $routes->get('dashboard', 'DashboardController::index');
+
+        $routes->get('view-designation', 'DeignationController::viewDesignation');
 
         $routes->get('set-formats', 'FormatController::formatList');
         $routes->post('format-update', 'FormatController::saveFormat');
@@ -60,5 +61,16 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 
         $routes->get('fee-setup', 'FeeController::feeSetUp');
         $routes->post('save-fee', 'FeeController::saveFee');
+        // school settings routes
+        $routes->get('school-settings','SchoolSettingController::schoolSettings',['as' =>'schoolSettings']);
+        // period routes
+        $routes->get('periods','PeriodController::periodPage',['as' => 'periodPage']);
+        $routes->post('periods','PeriodController::savePeriod',['as' => 'savePeriod']);
+        $routes->get('period/delete/(:num)', 'PeriodController::deletePeriod/$1', ['as' => 'deletePeriod']);
+
+        // time table
+        $routes->get('time-table-page','PeriodController::timeTablePage',['as'=> 'timeTablePage']);
+        $routes->post('time-table-page','PeriodController::saveTimeTable',['as' => 'saveTimeTable']);
+
     });
 });
