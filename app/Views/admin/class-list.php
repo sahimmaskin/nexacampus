@@ -92,7 +92,7 @@
                                         <tr>
                                             <th>Sr. No.</th>
                                             <th>Name</th>
-                                            <th>Actionn</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
