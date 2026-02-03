@@ -22,7 +22,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#classModal"
                         data-session="{}">
-                        Add Class
+                        Add Designation
                     </button>
                 </div>
                 <div class="modal fade" id="classModal" tabindex="-1">
@@ -87,11 +87,12 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <table class="table table-bordered mb-0" id="userTable">
+                                <table class="table table-bordered mb-0 text-center" id="userTable">
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
-                                            <th>Name</th>
+                                            <th>Department</th>
+                                            <th>Designation</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -101,6 +102,7 @@
                                             <?php foreach ($lists as $row): ?>
                                                 <tr>
                                                     <td><?= $c++ ?></td>
+                                                    <td><?= esc($row['department_name']) ?></td>
                                                     <td><?= esc($row['name']) ?></td>
                                                     <td>
                                                         <button

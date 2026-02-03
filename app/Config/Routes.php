@@ -26,8 +26,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
 
         $routes->get('dashboard', 'DashboardController::index');
 
-        $routes->get('view-designation', 'DeignationController::viewDesignation');
-
         $routes->get('set-formats', 'FormatController::formatList');
         $routes->post('format-update', 'FormatController::saveFormat');
 
@@ -35,6 +33,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->get('add-user', 'UserController::form');
         $routes->get('edit-user/(:any)', 'UserController::form/$1');
         $routes->post('save-user', 'UserController::save');
+        $routes->get('view-designation', 'DesignationController::viewDesignation');
 
         $routes->get('profile', 'DashboardController::index');
         $routes->get('change-password', 'DashboardController::index');
@@ -71,6 +70,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         // time table
         $routes->get('time-table-page','PeriodController::timeTablePage',['as'=> 'timeTablePage']);
         $routes->post('time-table-page','PeriodController::saveTimeTable',['as' => 'saveTimeTable']);
-
+        $routes->get('time-slot-page','PeriodController::timeSlotPage',['as' => 'timeSlotPage']);
     });
 });
