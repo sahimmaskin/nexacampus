@@ -211,7 +211,7 @@ foreach ($classes as $class) {
                                         <?php endforeach ?>
                                         <?php else : ?>
                                         <tr>
-                                            <td colspan="4" class="text-center text-muted">
+                                            <td colspan="6" class="text-center text-muted">
                                                 No Data Found to be displayed
                                             </td>
                                         </tr>
