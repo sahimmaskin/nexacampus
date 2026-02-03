@@ -131,10 +131,10 @@
                                     <thead>
                                         <tr>
                                             <th>Sr. No.</th>
-                                            <th>Class </th>
-                                            <th>Section</th>
-                                            <th>Day</th>
-                                            <th>Period Time</th>
+                                            <th>Teacher Name </th>
+                                            <th>Time Table</th>
+                                            <th>Period Name</th>
+                                            <th>Subject Name</th>
 
                                             <th style="width:10vw;">Actions</th>
                                         </tr>
@@ -180,7 +180,7 @@
                                         <?php endforeach ?>
                                         <?php else : ?>
                                         <tr>
-                                            <td colspan="4" class="text-center text-muted">
+                                            <td colspan=6" class="text-center text-muted">
                                                 No Data Found to be displayed
                                             </td>
                                         </tr>

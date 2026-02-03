@@ -177,6 +177,8 @@ class PeriodController extends BaseController
     }
 public function saveTimeSlot()
 {
+    $id = $this->request->getPost('id'); // hidden input for edit
+
     $data = [
         'timetable_id' => $this->request->getPost('timetable_id'),
         'period_id'    => $this->request->getPost('period_id'),
@@ -184,29 +186,56 @@ public function saveTimeSlot()
         'user_id'      => $this->request->getPost('user_id'),
     ];
 
-    // 1️⃣ Prevent duplicate slot
-    $exists = $this->timeSlotModel
+    /**
+     *  Prevent duplicate slot (same timetable + same period)
+     */
+    $duplicateQuery = $this->timeSlotModel
         ->where('timetable_id', $data['timetable_id'])
-        ->where('period_id', $data['period_id'])
-        ->first();
+        ->where('period_id', $data['period_id']);
 
-    if ($exists) {
-        return redirect()->back()->with('error', 'Slot already exists for this period');
+    if ($id) {
+        // exclude current record while updating
+        $duplicateQuery->where('id !=', $id);
     }
 
-    // 2️⃣ Prevent teacher clash
-    $teacherBusy = $this->timeSlotModel
+    if ($duplicateQuery->first()) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Slot already exists for this period');
+    }
+
+    /**
+     * 🔒 Prevent teacher clash (same teacher + same period)
+     */
+    $teacherQuery = $this->timeSlotModel
         ->where('user_id', $data['user_id'])
-        ->where('period_id', $data['period_id'])
-        ->first();
+        ->where('period_id', $data['period_id']);
 
-    if ($teacherBusy) {
-        return redirect()->back()->with('error', 'Teacher already assigned in this period');
+    if ($id) {
+        $teacherQuery->where('id !=', $id);
     }
 
-    $this->timeSlotModel->insert($data);
+    if ($teacherQuery->first()) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Teacher already assigned in this period');
+    }
 
-    return redirect()->back()->with('success', 'Time slot added successfully');
+    /**
+     * 💾 Save data
+     */
+    if ($id) {
+        $this->timeSlotModel->update($id, $data);
+        $message = 'Time slot updated successfully';
+    } else {
+        $this->timeSlotModel->insert($data);
+        $message = 'Time slot added successfully';
+    }
+
+    return redirect()
+        ->back()
+        ->with('success', $message);
 }
+
 
 }
