@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/nouislider/nouislider.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>vendor/fullcalendar/main.min.css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/admin/') ?>css/style.css" />
+     <?= $this->renderSection('css') ?>
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-97489509-8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -37,6 +38,7 @@
 
         gtag('config', 'UA-97489509-8');
     </script>
+
 </head>
 
 <body>
@@ -458,7 +460,7 @@
     <script src="<?php echo base_url('assets/admin/') ?>js/demo.js"></script>
     <script src="<?php echo base_url('assets/admin/') ?>js/demo-chart-js.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<?= $this->renderSection('scripts') ?>
 </body>
 
 </html>
