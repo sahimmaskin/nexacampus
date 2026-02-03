@@ -8,7 +8,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
 use App\Models\DesignationModel;
 
-class UserController extends BaseController
+class StaffController extends BaseController
 {
     protected $userModel;
     protected $trustId;

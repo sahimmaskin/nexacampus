@@ -52,7 +52,7 @@
                                     <option value="" disabled <?= empty($this->data['details']['designation']) ? 'selected' : '' ?>>
                                         Choose Designation
                                     </option>
-                                    <?php foreach ($departmentList as $value): ?>
+                                    <?php foreach ($designationList as $value): ?>
                                         <option value="<?= $value['id']; ?>"
                                             <?= (!empty($details)
                                                 && $this->data['details']['designation'] == $value['id'])

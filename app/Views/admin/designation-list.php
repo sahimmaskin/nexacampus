@@ -20,28 +20,40 @@
                     <button
                         class="btn btn-primary"
                         data-bs-toggle="modal"
-                        data-bs-target="#classModal"
+                        data-bs-target="#designationModal"
                         data-session="{}">
                         Add Designation
                     </button>
                 </div>
-                <div class="modal fade" id="classModal" tabindex="-1">
+                <div class="modal fade" id="designationModal" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
 
-                            <form method="post" action="<?= base_url('admin/save-class') ?>">
+                            <form method="post" action="<?= base_url('admin/save-designation') ?>">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="id">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add Class</h5>
+                                    <h5 class="modal-title"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
 
                                 <div class="modal-body">
                                     <input type="hidden" name="school_id" value="<?= session('schoolId') ?>">
-                                    <input type="hidden" name="trust_id" value="<?= session('trustId') ?>">
                                     <div class="mb-3">
-                                        <label>Class Name <span class="text-danger">*</span></label>
+                                        <label class="form-label">
+                                            Select Department <span class="text-danger">*</span>
+                                        </label>
+                                        <select name="department_id" id="department_id" class="form-select" required>
+                                            <option value="" selected disabled>Select Department</option>
+                                            <?php foreach ($departmentList as $row): ?>
+                                                <option value="<?= $row['id'] ?>">
+                                                    <?= $row['name'] ?>
+                                                </option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Designation Name <span class="text-danger">*</span></label>
                                         <input type="text" name="name" class="form-control" required>
                                     </div>
                                 </div>
@@ -108,7 +120,7 @@
                                                         <button
                                                             class="btn btn-primary"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#classModal"
+                                                            data-bs-target="#designationModal"
                                                             data-session='<?= json_encode($row) ?>'>
                                                             <i class="fa fa-edit"></i>
                                                         </button>
@@ -138,21 +150,20 @@
 </div>
 
 <script>
-    const modal = document.getElementById('classModal');
+    const modal = document.getElementById('designationModal');
     const form = modal.querySelector('form');
     modal.addEventListener('show.bs.modal', function(e) {
         const button = e.relatedTarget;
         const data = JSON.parse(button.dataset.session || '{}');
         form.reset();
         modal.querySelector('.modal-title').textContent =
-            data.id ? 'Edit Class' : 'Add Class';
+            data.id ? 'Edit Designation' : 'Add Designation';
         for (const key in data) {
             if (form.elements[key]) {
                 form.elements[key].value = data[key];
             }
         }
         form.elements['school_id'].value = "<?= session('schoolId') ?>";
-        form.elements['trust_id'].value = "<?= session('trustId') ?>";
     });
 </script>
 <?= $this->endSection() ?>

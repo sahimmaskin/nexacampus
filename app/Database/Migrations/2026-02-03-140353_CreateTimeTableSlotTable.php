@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTimeSlotsTable extends Migration
+class CreateTimeTableSlotTable extends Migration
 {
    public function up()
 {
@@ -17,7 +17,7 @@ class CreateTimeSlotsTable extends Migration
             
         ],
 
-        'user_id' => [
+        'staff_id' => [
             'type'       => 'INT',
             'constraint' => 11,
             'unsigned'   => true,
@@ -58,7 +58,7 @@ class CreateTimeSlotsTable extends Migration
     $this->forge->addForeignKey('timetable_id', 'timetables', 'id', 'SET NULL', 'CASCADE');
     $this->forge->addForeignKey('period_id', 'periods', 'id', 'SET NULL', 'CASCADE');
     $this->forge->addForeignKey('subject_id', 'subject', 'id', 'SET NULL', 'CASCADE');
-    $this->forge->addForeignKey('user_id', 'user', 'id', 'SET NULL', 'CASCADE');
+    $this->forge->addForeignKey('staff_id', 'staff', 'id', 'SET NULL', 'CASCADE');
 
     $this->forge->createTable('timetable_slots');
 }

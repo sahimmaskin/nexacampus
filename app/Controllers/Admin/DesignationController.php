@@ -43,5 +43,26 @@ class DesignationController extends BaseController
         return view('admin/designation-list', $data);
     }
 
-    
+    public function saveDesignation()
+    {
+        $id = !empty($this->request->getPost('id')) ? $this->request->getPost('id') : null;
+
+        $formData = [
+            'department_id'            => !empty($this->request->getPost('department_id')) ? $this->request->getPost('department_id') : null,
+            'name'            => !empty($this->request->getPost('name')) ? $this->request->getPost('name') : null,
+            'school_id'            => !empty($this->request->getPost('school_id')) ? $this->request->getPost('school_id') : null,
+        ];
+
+        if ($id) {
+            $this->designationModel->update($id, $formData);
+            $lastID = $id;
+        } else {
+            $lastID = $this->designationModel->insert($formData);
+        }
+
+        return redirect('admin/view-designation')->with(
+            'success',
+            $id ? 'Designation updated successfully' : 'Designation added successfully'
+        );
+    }
 }

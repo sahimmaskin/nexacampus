@@ -29,11 +29,12 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->get('set-formats', 'FormatController::formatList');
         $routes->post('format-update', 'FormatController::saveFormat');
 
-        $routes->get('user-list', 'UserController::index');
-        $routes->get('add-user', 'UserController::form');
-        $routes->get('edit-user/(:any)', 'UserController::form/$1');
-        $routes->post('save-user', 'UserController::save');
+        $routes->get('user-list', 'StaffController::index');
+        $routes->get('add-user', 'StaffController::form');
+        $routes->get('edit-user/(:any)', 'StaffController::form/$1');
+        $routes->post('save-user', 'StaffController::save');
         $routes->get('view-designation', 'DesignationController::viewDesignation');
+        $routes->post('save-designation', 'DesignationController::saveDesignation');
 
         $routes->get('profile', 'DashboardController::index');
         $routes->get('change-password', 'DashboardController::index');
