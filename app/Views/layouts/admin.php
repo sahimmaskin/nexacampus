@@ -317,7 +317,7 @@
                                             </a>
                                         </li>
                                         <li class="sa-nav__menu-item">
-                                            <a href="<?= route_to('timeTablePage') ?>" class="sa-nav__link">
+                                            <a href="<?= route_to('timeSlotPage') ?>" class="sa-nav__link">
                                                 <span class="sa-nav__menu-item-padding"></span>
                                                 <span class="sa-nav__title">Time Table Slots </span>
                                             </a>

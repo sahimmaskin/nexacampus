@@ -72,6 +72,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         // time table
         $routes->get('time-table-page','PeriodController::timeTablePage',['as'=> 'timeTablePage']);
         $routes->post('time-table-page','PeriodController::saveTimeTable',['as' => 'saveTimeTable']);
-
+        $routes->get('time-slot-page','PeriodController::timeSlotPage',['as' => 'timeSlotPage']);
     });
 });
