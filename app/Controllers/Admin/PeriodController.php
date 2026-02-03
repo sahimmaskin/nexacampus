@@ -14,8 +14,8 @@ use App\Models\UserModel;
 
 class PeriodController extends BaseController
 {
-   
-     public function __construct()
+
+    public function __construct()
     {
         $this->sessionModel = new SessionModel();
         $this->timeTableModel = new TimetableModel();
@@ -33,11 +33,11 @@ class PeriodController extends BaseController
     public function periodPage()
     {
         $limit = PER_PAGE;
-      
+
         $allPeriods = $this->periodModel
             ->where('school_id', $this->schoolId)
             ->paginate($limit);
-       
+
         $data = [
             'title'         => 'Periods',
             'lists'         => $allPeriods,
@@ -73,29 +73,29 @@ class PeriodController extends BaseController
     }
 
     public function deletePeriod($id)
-{
-    if (!$id) {
-        return redirect()->back()->with('error', 'Invalid Period ID');
+    {
+        if (!$id) {
+            return redirect()->back()->with('error', 'Invalid Period ID');
+        }
+
+        $period = $this->periodModel->find($id);
+
+        if (!$period) {
+            return redirect()->back()->with('error', 'Period not found');
+        }
+
+        $this->periodModel->delete($id);
+
+        return redirect()->back()->with('success', 'Period deleted successfully');
     }
 
-    $period = $this->periodModel->find($id);
 
-    if (!$period) {
-        return redirect()->back()->with('error', 'Period not found');
-    }
-
-    $this->periodModel->delete($id);
-
-    return redirect()->back()->with('success', 'Period deleted successfully');
-}
-
-
-   // for timetable functions
-     public function timeTablePage()
+    // for timetable functions
+    public function timeTablePage()
     {
         $limit = PER_PAGE;
-      
-      $allTimeTable = $this->timeTableModel
+
+        $allTimeTable = $this->timeTableModel
             ->getTimetableWithPeriod($this->schoolId)
             ->paginate($limit);
         $allClass = $this->classModel
@@ -107,7 +107,7 @@ class PeriodController extends BaseController
         $allPeriod = $this->periodModel
             ->where('school_id', $this->schoolId)
             ->paginate($limit);
-       
+
         $data = [
             'title'         => 'Time Table',
             'lists'         => $allTimeTable,
@@ -122,120 +122,119 @@ class PeriodController extends BaseController
     }
 
     public function saveTimeTable()
-        {
-            $id = $this->request->getPost('id');
+    {
+        $id = $this->request->getPost('id');
 
-            $formData = [
-                'school_id'  => $this->request->getPost('school_id'),
-                'class_id'   => $this->request->getPost('class_id'),
-                'section_id' => $this->request->getPost('section_id'),
-                'period_id'  => $this->request->getPost('period_id'),
-                'day'        => $this->request->getPost('day'),
-            ];
+        $formData = [
+            'school_id'  => $this->request->getPost('school_id'),
+            'class_id'   => $this->request->getPost('class_id'),
+            'section_id' => $this->request->getPost('section_id'),
+            'period_id'  => $this->request->getPost('period_id'),
+            'day'        => $this->request->getPost('day'),
+        ];
 
-            if ($id) {
-                $this->timeTableModel->update($id, $formData);
-                $message = 'Timetable updated successfully';
-            } else {
-                $this->timeTableModel->insert($formData);
-                $message = 'Timetable added successfully';
-            }
-
-            return redirect()
-                ->to(route_to('timeTablePage'))
-                ->with('success', $message);
+        if ($id) {
+            $this->timeTableModel->update($id, $formData);
+            $message = 'Timetable updated successfully';
+        } else {
+            $this->timeTableModel->insert($formData);
+            $message = 'Timetable added successfully';
         }
 
-    public function timeSlotPage(){
-         $limit = PER_PAGE;
-      
+        return redirect()
+            ->to(route_to('timeTablePage'))
+            ->with('success', $message);
+    }
+
+    public function timeSlotPage()
+    {
+        $limit = PER_PAGE;
+
         $allTimeSlotTable = $this->timeSlotModel
-    ->getSlotsWithDetails()
-    ->paginate($limit);
+            ->getSlotsWithDetails()
+            ->paginate($limit);
 
         $allUser = $this->userModel
             ->paginate($limit);
         $allTimetable = $this->timeTableModel
             ->paginate($limit);
         $allSubject = $this->subjectModel
-            
+
             ->paginate($limit);
         $allPeriod = $this->periodModel
             ->paginate($limit);
-       
+
         $data = [
             'title'         => 'Time Slot Table',
             'lists'         => $allTimeSlotTable,
             'pager'         => $this->timeSlotModel->pager,
             'limit'         => $limit,
-            'timeTable'     =>$allTimetable,
+            'timeTable'     => $allTimetable,
             'users'         => $allUser,
             'subjects'      => $allSubject,
             'periods'       => $allPeriod,
         ];
         return view('admin/timetables/time_table_slots', $data);
     }
-public function saveTimeSlot()
-{
-    $id = $this->request->getPost('id'); // hidden input for edit
+    public function saveTimeSlot()
+    {
+        $id = $this->request->getPost('id'); // hidden input for edit
 
-    $data = [
-        'timetable_id' => $this->request->getPost('timetable_id'),
-        'period_id'    => $this->request->getPost('period_id'),
-        'subject_id'   => $this->request->getPost('subject_id'),
-        'user_id'      => $this->request->getPost('user_id'),
-    ];
+        $data = [
+            'timetable_id' => $this->request->getPost('timetable_id'),
+            'period_id'    => $this->request->getPost('period_id'),
+            'subject_id'   => $this->request->getPost('subject_id'),
+            'user_id'      => $this->request->getPost('user_id'),
+        ];
 
-    /**
-     *  Prevent duplicate slot (same timetable + same period)
-     */
-    $duplicateQuery = $this->timeSlotModel
-        ->where('timetable_id', $data['timetable_id'])
-        ->where('period_id', $data['period_id']);
+        /**
+         *  Prevent duplicate slot (same timetable + same period)
+         */
+        $duplicateQuery = $this->timeSlotModel
+            ->where('timetable_id', $data['timetable_id'])
+            ->where('period_id', $data['period_id']);
 
-    if ($id) {
-        // exclude current record while updating
-        $duplicateQuery->where('id !=', $id);
+        if ($id) {
+            // exclude current record while updating
+            $duplicateQuery->where('id !=', $id);
+        }
+
+        if ($duplicateQuery->first()) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Slot already exists for this period');
+        }
+
+        /**
+         * 🔒 Prevent teacher clash (same teacher + same period)
+         */
+        $teacherQuery = $this->timeSlotModel
+            ->where('user_id', $data['user_id'])
+            ->where('period_id', $data['period_id']);
+
+        if ($id) {
+            $teacherQuery->where('id !=', $id);
+        }
+
+        if ($teacherQuery->first()) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Teacher already assigned in this period');
+        }
+
+        /**
+         * 💾 Save data
+         */
+        if ($id) {
+            $this->timeSlotModel->update($id, $data);
+            $message = 'Time slot updated successfully';
+        } else {
+            $this->timeSlotModel->insert($data);
+            $message = 'Time slot added successfully';
+        }
+
+        return redirect()
+            ->back()
+            ->with('success', $message);
     }
-
-    if ($duplicateQuery->first()) {
-        return redirect()->back()
-            ->withInput()
-            ->with('error', 'Slot already exists for this period');
-    }
-
-    /**
-     * 🔒 Prevent teacher clash (same teacher + same period)
-     */
-    $teacherQuery = $this->timeSlotModel
-        ->where('user_id', $data['user_id'])
-        ->where('period_id', $data['period_id']);
-
-    if ($id) {
-        $teacherQuery->where('id !=', $id);
-    }
-
-    if ($teacherQuery->first()) {
-        return redirect()->back()
-            ->withInput()
-            ->with('error', 'Teacher already assigned in this period');
-    }
-
-    /**
-     * 💾 Save data
-     */
-    if ($id) {
-        $this->timeSlotModel->update($id, $data);
-        $message = 'Time slot updated successfully';
-    } else {
-        $this->timeSlotModel->insert($data);
-        $message = 'Time slot added successfully';
-    }
-
-    return redirect()
-        ->back()
-        ->with('success', $message);
-}
-
-
 }
